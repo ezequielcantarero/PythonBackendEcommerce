@@ -15,7 +15,7 @@ load_dotenv()
 
 # --- CONFIG SQL (Postgres) ---
 DATABASE_URL = os.getenv("DATABASE_URL")
-engine = create_async_engine(DATABASE_URL, echo=True) # echo=True para ver logs de SQL
+engine = create_async_engine(DATABASE_URL, echo=True) # echo=True para ver logs de SQL para PROD echo=False
 
 # Dependencia para inyectar la sesión SQL en los endpoints
 async def get_session():
