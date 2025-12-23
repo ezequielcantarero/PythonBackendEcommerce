@@ -1,0 +1,21 @@
+# --- Core ---
+fastapi
+uvicorn[standard]
+python-dotenv
+python-multipart
+
+# --- SQL (Postgres) ---
+sqlmodel
+asyncpg
+
+# --- NoSQL (Mongo) ---
+motor
+beanie
+
+# --- Auth & Security ---
+pyjwt
+passlib[bcrypt] 
+# Nota: passlib instala bcrypt automáticamente, puedes quitar "bcrypt" solo si usas este.
+
+# --- Utils ---
+email-validator
