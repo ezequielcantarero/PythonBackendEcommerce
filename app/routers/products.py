@@ -1,13 +1,16 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from typing import List
 from app.models.product_mongo import Product
+from app.models.user_sql import User
+from app.dependencies import get_current_user, get_current_admin
 
 # Prefix="/products" significa que todas las rutas empezarán con /products
 router = APIRouter(prefix="/products", tags=["Productos (Mongo)"])
 
 # 1. CREAR PRODUCTO (POST)
 @router.post("/", response_model=Product)
-async def create_product(product: Product):
+async def create_product(product: Product, current_user: User = Depends(get_current_admin)):
+
     # ¡Mira qué fácil es guardar en Mongo con Beanie!
     # No hace falta "insert_one" ni diccionarios raros.
     await product.create() 
