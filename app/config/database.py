@@ -8,6 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
 from app.models.user_sql import User
 from app.models.product_mongo import Product
+from app.models.order_sql import Order, OrderItem
 
 # 1. Cargar variables de entorno (necesitas python-dotenv)
 from dotenv import load_dotenv

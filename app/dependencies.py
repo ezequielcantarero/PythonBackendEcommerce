@@ -40,7 +40,7 @@ async def get_current_user(
         
     return user
 
-    async def get_current_admin(current_user: User = Depends(get_current_user)) -> User:
+async def get_current_admin(current_user: User = Depends(get_current_user)) -> User:
     """
     Esta función hace 2 cosas:
     1. Llama a get_current_user para validar el token.
