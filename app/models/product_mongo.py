@@ -21,5 +21,7 @@ class Product(Document):
 
     created_at: datetime = Field(default_factory=datetime.utcnow)
 
+    image_url: Optional[str] = None
+
     class Settings:
         name = "products" # Nombre de la colección en Mongo
