@@ -4,6 +4,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.models.user_sql import User
 from app.config.database import get_session
 from app.utils import hash_password
+from app.dependencies import get_current_user
+from uuid import UUID
 
 router = APIRouter(prefix="/users", tags=["Usuarios (SQL)"])
 
@@ -15,6 +17,16 @@ class UserCreate(BaseModel):
     username: str
     email: EmailStr
     password: str
+
+class UserResponse(BaseModel):
+    id: UUID
+    username: str
+    email: str
+    role: str
+    is_active: bool
+
+    class Config:
+        from_attributes = True
 
 @router.post("/", response_model=User)
 async def create_user(user_input: UserCreate, db: AsyncSession = Depends(get_session)):
@@ -44,3 +56,7 @@ async def create_user(user_input: UserCreate, db: AsyncSession = Depends(get_ses
     await db.refresh(new_user) # Recarga el objeto con el ID generado por la DB
     
     return new_user
+
+@router.get("/me", response_model=UserResponse) 
+async def read_users_me(current_user: User = Depends(get_current_user)):
+    return current_user
